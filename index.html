@@ -218,7 +218,68 @@ input,textarea{font-family:inherit;color:inherit;background:transparent;border:n
 .file-info .meta{flex:1;min-width:0}
 .file-info .name{font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .file-info .sub{font-size:11px;color:var(--text-2)}
+
+/* ============ AGENT PANEL ============ */
+.hidden{display:none!important}
+.agent-panel{margin:10px 12px 0;background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;transition:all .25s ease}
+.agent-panel.collapsed .agent-panel-body{display:none}
+.agent-panel.expanded{position:fixed;left:12px;right:12px;top:68px;bottom:110px;max-width:456px;margin:0 auto;z-index:85}
+.agent-panel-header{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;background:transparent;text-align:left}
+.agent-panel-title{display:flex;align-items:center;gap:10px;min-width:0;font-weight:600;font-size:13.5px}
+.agent-panel-title-text{display:flex;flex-direction:column;min-width:0}
+.agent-panel-title-text small{font-size:11px;color:var(--text-2);font-weight:500}
+.agent-panel-actions{display:flex;align-items:center;gap:8px;color:var(--text-2)}
+.agent-mini-btn{width:28px;height:28px;border-radius:8px;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px}
+.agent-collapse-icon{font-size:14px;transition:transform .2s}
+.agent-panel.collapsed .agent-collapse-icon{transform:rotate(-90deg)}
+.agent-run-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.agent-run-dot.running{animation:agentPulse 1.2s infinite}
+.agent-run-dot.done{background:var(--success);animation:none}
+.agent-run-dot.failed{background:var(--error);animation:none}
+@keyframes agentPulse{0%{box-shadow:0 0 0 0 rgba(124,77,255,.5)}100%{box-shadow:0 0 0 10px rgba(124,77,255,0)}}
+.agent-panel-body{max-height:230px;overflow:auto;border-top:1px solid var(--border);background:linear-gradient(180deg,transparent,rgba(124,77,255,.02))}
+.agent-steps{display:flex;flex-direction:column}
+.agent-step{border-bottom:1px solid var(--border);font-size:13.5px;cursor:pointer}
+.agent-step:last-child{border-bottom:none}
+.agent-step-head{display:flex;align-items:center;gap:10px;padding:10px 14px}
+.agent-step.running{border-left:3px solid var(--accent);background:var(--accent-soft)}
+.agent-step.done{border-left:3px solid var(--success)}
+.agent-step.failed{border-left:3px solid var(--error)}
+.agent-step-icon{font-size:16px;line-height:1;flex-shrink:0}
+.agent-step-title{font-weight:600;color:var(--text);white-space:nowrap}
+.agent-step-sep{color:var(--text-2)}
+.agent-step-detail{color:var(--text-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}
+.agent-step-arrow{margin-left:auto;color:var(--text-2);transition:transform .2s}
+.agent-step.open .agent-step-arrow{transform:rotate(90deg)}
+.agent-step-content{display:none;padding:0 14px 12px 42px;color:var(--text-2);font-size:12.5px;line-height:1.5}
+.agent-step.open .agent-step-content{display:block}
+.agent-step-content pre{margin:0;background:#0d1117;color:#e6edf3;border-radius:8px;padding:10px;overflow:auto;white-space:pre-wrap;word-break:break-word}
+.agent-step-text{white-space:pre-wrap;word-break:break-word}
+.file-downloads{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+.file-download-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 12px}
+.file-download-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.file-download-name{flex:1;min-width:0;font-weight:600;font-size:13.5px;word-break:break-word}
+.file-download-actions{display:flex;gap:8px;flex-wrap:wrap}
+.file-btn{padding:6px 12px;border-radius:8px;background:var(--accent);color:#fff;font-size:13px;font-weight:600}
+.file-btn.secondary{background:var(--accent-soft);color:var(--accent)}
+.file-preview{display:none;margin-top:10px;background:#0d1117;color:#e6edf3;border-radius:10px;padding:10px;max-height:180px;overflow:auto;white-space:pre-wrap;word-break:break-word;font-size:12.5px}
+.file-download-card.show-preview .file-preview{display:block}
+.zip-btn{padding:9px 16px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#a78bfa);color:#fff;font-weight:600;width:100%;margin-top:4px}
+.zip-btn.subtle{background:var(--accent-soft);color:var(--accent)}
+.inline-note{font-size:12px;color:var(--text-2);margin-bottom:8px}
+.zip-spinner,.mini-spinner{display:inline-block;border-radius:50%;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:spin .8s linear infinite}
+.zip-spinner{width:14px;height:14px;vertical-align:-2px;margin-right:8px}
+.mini-spinner{width:12px;height:12px;border-width:2px;border-color:rgba(124,77,255,.2);border-top-color:var(--accent);margin-right:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (max-width:420px){
+  .agent-panel{margin:8px 10px 0}
+  .agent-panel-body{max-height:210px}
+  .file-download-actions{width:100%}
+  .file-btn{flex:1;text-align:center}
+}
+
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 </head>
 <body>
 <div class="app" id="app">
@@ -256,6 +317,29 @@ input,textarea{font-family:inherit;color:inherit;background:transparent;border:n
     </div>
   </div>
 
+
+
+  <!-- AGENT PANEL -->
+  <div class="agent-panel hidden" id="agentPanel">
+    <button class="agent-panel-header" id="agentPanelHeader" aria-label="Toggle agent panel">
+      <div class="agent-panel-title">
+        <span class="agent-run-dot" id="agentRunDot"></span>
+        <div class="agent-panel-title-text">
+          <span id="agentProgressLabel">Task progress 0/0</span>
+          <small id="agentStatusText">Idle</small>
+        </div>
+      </div>
+      <div class="agent-panel-actions">
+        <button class="agent-mini-btn" id="agentOpenBtn" type="button" aria-label="Open logs">📂</button>
+        <button class="agent-mini-btn" id="agentExpandBtn" type="button" aria-label="Expand panel">⛶</button>
+        <span class="agent-collapse-icon" id="agentCollapseIcon">▾</span>
+      </div>
+    </button>
+    <div class="agent-panel-body" id="agentPanelBody">
+      <div class="agent-steps" id="agentSteps"></div>
+    </div>
+  </div>
+
   <!-- COMPOSER -->
   <div class="composer">
     <div class="style-row" id="styleRow" style="display:none"></div>
@@ -267,6 +351,7 @@ input,textarea{font-family:inherit;color:inherit;background:transparent;border:n
       <div class="chip" data-mode="summarize">📝 Summarize</div>
       <div class="chip" data-mode="code">💻 Code</div>
       <div class="chip" data-mode="write">✍️ Write</div>
+      <div class="chip" data-mode="agent">🧠 Agent</div>
       <div class="chip" data-mode="youtube">▶️ YouTube</div>
       <div class="chip" data-mode="status" id="chipStatus">📊 Status</div>
     </div>
@@ -388,7 +473,15 @@ const state = {
   transFrom: 'auto', transTo: 'hi',
   codeMode: 'explain', writeMode: 'blog', summaryMode: 'text',
   responseTimes: [],
-  isOnline: true
+  isOnline: true,
+  agentTask: {
+    running: false,
+    collapsed: false,
+    steps: [],
+    files: [],
+    prompt: '',
+    wantsZip: false
+  }
 };
 
 function genUUID(){return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c==='x'?r:(r&0x3|0x8)).toString(16)})}
@@ -418,6 +511,278 @@ function copyCode(btn){const code=btn.nextElementSibling.innerText;navigator.cli
 function toast(msg){const t=$('#toast');t.innerText=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500)}
 function timeAgo(ts){const s=Math.floor((Date.now()-ts)/1000);if(s<60)return s+'s ago';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago'}
 function fmtUptime(s){if(!s||s<0)return '—';const h=Math.floor(s/3600),m=Math.floor((s%3600)/60);return `${h}h ${m}m`}
+
+function escRegExp(str){return String(str||'').replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+function sanitizeError(msg){
+  let out = String(msg||'Unknown error');
+  if(state.token) out = out.replace(new RegExp(escRegExp(state.token),'g'),'[hidden]');
+  if(state.baseUrl) out = out.replace(new RegExp(escRegExp(state.baseUrl),'g'),'[backend]');
+  out = out.replace(/https?:\/\/[^\s)]+/g,'[url]').replace(/Bearer\s+[A-Za-z0-9._-]+/gi,'Bearer [hidden]');
+  return out.replace(/\s+/g,' ').trim().slice(0,160);
+}
+function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
+function slugifyPrompt(text){return (String(text||'project').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,48) || 'project')}
+function countLines(text){return String(text||'').replace(/\n$/,'').split(/\r?\n/).length}
+function inferLangFromName(name=''){const ext=(name.split('.').pop()||'').toLowerCase();return({js:'javascript',mjs:'javascript',cjs:'javascript',ts:'typescript',tsx:'tsx',jsx:'jsx',py:'python',html:'html',css:'css',json:'json',md:'markdown',sh:'bash',txt:'text'}[ext]||ext||'text')}
+function langToExt(info=''){const key=String(info||'').toLowerCase().trim().split(/\s+/)[0];return({javascript:'js',js:'js',typescript:'ts',tsx:'tsx',jsx:'jsx',python:'py',py:'py',html:'html',css:'css',json:'json',markdown:'md',md:'md',bash:'sh',shell:'sh',sh:'sh',text:'txt'}[key]||'txt')}
+function isProjectIntent(text){return /\b(build|create|make|develop|website|web\s*app|landing page|portfolio|project|app|script|frontend|backend|dashboard|clone|tool|game)\b/i.test(text||'')}
+function wantsZip(text){return /\bzip\b|download all|zip chahiye|zip bana|zip file/i.test(text||'')}
+function stripCodeBlocks(text){return String(text||'').replace(/```[^\n`]*\n?[\s\S]*?```/g,'').trim()}
+function guessFileName(info,index,content=''){
+  const clean = String(info||'').trim();
+  const quoted = clean.match(/([A-Za-z0-9_./-]+\.[A-Za-z0-9]+)(?=$|\s)/);
+  if(quoted) return quoted[1].split('/').pop();
+  const ext = langToExt(clean);
+  if(ext==='html' && /<style[\s>]|<script[\s>]|<html/i.test(content)) return 'index.html';
+  if(ext==='css') return 'style.css';
+  if(ext==='js') return 'script.js';
+  if(ext==='json') return 'data.json';
+  return `file-${index+1}.${ext}`;
+}
+function extractCodeBlocks(text){
+  const blocks=[];
+  const re=/```([^\n`]*)\n?([\s\S]*?)```/g;
+  let m, i=0;
+  while((m=re.exec(String(text||'')))){
+    const info=(m[1]||'').trim();
+    const content=(m[2]||'').trim();
+    if(!content) continue;
+    blocks.push({info,content,name:guessFileName(info,i,content)});
+    i++;
+  }
+  return blocks;
+}
+function normalizeAgentStep(raw,index){
+  const type = String(raw.type||raw.kind||'think').toLowerCase();
+  const label = raw.label || raw.name || raw.title || raw.command || raw.filename || '';
+  const detail = raw.detail || raw.description || raw.output || '';
+  const map = {
+    file:{icon:'📄',title:'File created'},
+    terminal:{icon:'▶️',title:'Execute Terminal'},
+    think:{icon:'💭',title:'Think'},
+    read:{icon:'📖',title:'Read'},
+    edit:{icon:'✏️',title:'Edit'},
+    deploy:{icon:'🚀',title:'Website deployed'},
+    zip:{icon:'📦',title:'Creating ZIP...'},
+    error:{icon:'⚠️',title:'Step failed'}
+  };
+  const meta = map[type] || {icon:'•',title:label||`Step ${index+1}`};
+  return {
+    type,
+    icon: meta.icon,
+    title: meta.title,
+    detail: sanitizeError(label || detail || ''),
+    content: raw.content || raw.preview || raw.output || raw.details || ''
+  };
+}
+function resetAgentPanel(){
+  const panel=$('#agentPanel');
+  panel.classList.remove('collapsed','expanded','hidden');
+  $('#agentSteps').innerHTML='';
+  $('#agentProgressLabel').innerText='Task progress 0/0';
+  $('#agentStatusText').innerText='Preparing';
+  $('#agentRunDot').className='agent-run-dot running';
+  state.agentTask.steps=[];
+  state.agentTask.files=[];
+}
+function syncAgentPanelVisibility(){
+  const panel=$('#agentPanel');
+  const shouldShow = state.mode==='agent' && (state.agentTask.running || state.agentTask.steps.length);
+  panel.classList.toggle('hidden', !shouldShow);
+}
+function scrollAgentPanel(){const body=$('#agentPanelBody');setTimeout(()=>body.scrollTop=body.scrollHeight,20)}
+function updateAgentProgress(done,total,status){
+  $('#agentProgressLabel').innerText = `Task progress ${done}/${total}`;
+  $('#agentStatusText').innerText = status || (done>=total?'✅ Complete':'Running');
+}
+function buildStepPreview(step){
+  if(step.content){
+    return `<pre><code>${escapeHtml(String(step.content).slice(0,5000))}</code></pre>`;
+  }
+  if(step.detail){
+    return `<div class="agent-step-text">${escapeHtml(step.detail)}</div>`;
+  }
+  return '<div class="agent-step-text">Completed</div>';
+}
+function createAgentStepRow(step,index){
+  const row=el('div','agent-step running');
+  row.dataset.index=index;
+  row.innerHTML = `<div class="agent-step-head"><span class="agent-step-icon">${step.icon}</span><span class="agent-step-title">${escapeHtml(step.title)}</span>${step.detail?`<span class="agent-step-sep">|</span><span class="agent-step-detail">${escapeHtml(step.detail)}</span>`:''}<span class="agent-step-arrow">›</span></div><div class="agent-step-content">${buildStepPreview(step)}</div>`;
+  row.onclick=()=>row.classList.toggle('open');
+  $('#agentSteps').appendChild(row);
+  scrollAgentPanel();
+  return row;
+}
+async function animateSteps(steps){
+  state.agentTask.steps = steps;
+  syncAgentPanelVisibility();
+  const total = steps.length || 1;
+  for(let i=0;i<steps.length;i++){
+    const step=steps[i];
+    updateAgentProgress(i,total,'Running');
+    const row=createAgentStepRow(step,i);
+    await sleep(step.type==='think'?480:340);
+    row.classList.remove('running');
+    row.classList.add(step.type==='error'?'failed':'done');
+    updateAgentProgress(i+1,total,i+1===total?'✅ Complete':'Running');
+  }
+  $('#agentRunDot').className='agent-run-dot done';
+}
+function makeBlobDownload(filename,content,mime='text/plain;charset=utf-8'){
+  const blob = new Blob([content],{type:mime});
+  const url = URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download=filename; a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),2000);
+}
+function renderFileDownloads(files,promptText,zipMode){
+  const wrap=el('div','file-downloads');
+  files.forEach((file,idx)=>{
+    const card=el('div','file-download-card');
+    const row=el('div','file-download-row');
+    row.innerHTML=`<span>📄</span><div class="file-download-name">${escapeHtml(file.name||`file-${idx+1}.txt`)}</div>`;
+    const actions=el('div','file-download-actions');
+    const previewBtn=el('button','file-btn secondary','Preview');
+    const downBtn=el('button','file-btn','↓');
+    previewBtn.onclick=()=>card.classList.toggle('show-preview');
+    downBtn.onclick=()=>makeBlobDownload(file.name||`file-${idx+1}.txt`,file.content||'');
+    actions.appendChild(previewBtn);
+    actions.appendChild(downBtn);
+    row.appendChild(actions);
+    card.appendChild(row);
+    card.appendChild(el('pre','file-preview',escapeHtml(file.content||'')));
+    wrap.appendChild(card);
+  });
+  if(files.length>1){
+    const zipBtn=el('button','zip-btn'+(zipMode?'':' subtle'),zipMode?'📦 Download ZIP':'📦 Download all as ZIP?');
+    zipBtn.onclick=()=>createAndDownloadZip(files, `${slugifyPrompt(promptText)}.zip`, zipBtn);
+    wrap.appendChild(zipBtn);
+  }
+  return wrap;
+}
+async function createAndDownloadZip(files,zipName,btn){
+  if(!window.JSZip){toast('JSZip failed to load');return}
+  const original = btn ? btn.innerHTML : '';
+  if(btn){btn.disabled=true;btn.innerHTML='<span class="zip-spinner"></span>Creating ZIP...'}
+  const zip = new JSZip();
+  files.forEach(file=>zip.file(file.name||'file.txt', file.content||''));
+  const blob = await zip.generateAsync({type:'blob'});
+  const url = URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=zipName;a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),3000);
+  toast('📦 ZIP ready!');
+  if(btn){btn.disabled=false;btn.innerHTML=original || '📦 Download ZIP'}
+}
+function parseStepsFromResponse(payload,promptText){
+  const data = payload && payload.data ? payload.data : payload;
+  const reply = data?.reply || data?.message || data?.content || data?.response || (typeof data==='string' ? data : 'Your project is ready!');
+  const filesFromData = Array.isArray(data?.files) ? data.files.map((f,i)=>({name:f.name||guessFileName(f.name||'',i,f.content||''),content:f.content||''})) : [];
+  let steps = Array.isArray(data?.steps) ? data.steps.map((s,i)=>normalizeAgentStep(s,i)) : [];
+  let files = filesFromData.length ? filesFromData : [];
+  if(!files.length && steps.length){
+    files = steps.filter(s=>s.type==='file' && s.content).map((s,i)=>({name:s.detail || `file-${i+1}.txt`,content:s.content||''}));
+  }
+  if(!steps.length || !files.length){
+    const blocks = extractCodeBlocks(reply);
+    const stripped = stripCodeBlocks(reply);
+    if(!files.length && blocks.length){
+      files = blocks.map((b,i)=>({name:b.name||guessFileName(b.info,i,b.content),content:b.content}));
+    }
+    if(!steps.length && files.length){
+      steps = [normalizeAgentStep({type:'think',label:'Planning the project'},0)];
+      files.forEach((f,i)=>steps.push(normalizeAgentStep({type:'file',label:f.name,content:f.content},i+1)));
+      steps.push(normalizeAgentStep({type:'deploy',label:'Project ready'},steps.length));
+    }
+    if(files.length===1 && countLines(files[0].content)<=30 && !isProjectIntent(promptText)){
+      return {
+        inline: true,
+        reply: stripped || 'Here is your code:',
+        code: files[0].content,
+        filename: files[0].name,
+        lang: inferLangFromName(files[0].name),
+        files,
+        steps: []
+      };
+    }
+  }
+  if(files.length>1 && wantsZip(promptText)){
+    steps.push(normalizeAgentStep({type:'zip',label:'Creating ZIP...'},steps.length));
+  }
+  return {inline:false,reply,files,steps};
+}
+async function doAgent(text){
+  resetAgentPanel();
+  state.agentTask.running = true;
+  state.agentTask.prompt = text;
+  state.agentTask.wantsZip = wantsZip(text);
+  syncAgentPanelVisibility();
+  let payload, ms=0;
+  try{
+    try{
+      const res = await api('/api/agent',{method:'POST',body:{prompt:text,model:'agent',session_id:state.sessionId}});
+      payload = res.data; ms = res.ms;
+    }catch(err){
+      if(String(err.message||'').includes('HTTP 404')){
+        const msgs = state.messages.filter(m=>m.role==='user'||m.role==='ai').map(m=>({role:m.role==='ai'?'assistant':'user',content:m.content}));
+        const res = await api('/api/chat',{method:'POST',body:{messages:msgs,model:'agent',session_id:state.sessionId}});
+        payload = res.data; ms = res.ms;
+      }else{
+        throw err;
+      }
+    }
+    const parsed = parseStepsFromResponse(payload,text);
+    if(parsed.inline){
+      state.agentTask.running = false;
+      state.agentTask.steps = [];
+      syncAgentPanelVisibility();
+      const inlineContent = (parsed.reply ? parsed.reply + '\n\n' : '') + `**Inline code (${parsed.filename})**\n\n\`\`\`${parsed.lang}\n${parsed.code}\n\`\`\``;
+      appendBubble('ai', inlineContent,{ms});
+      loadHistoryList();
+      return;
+    }
+    state.agentTask.files = parsed.files || [];
+    if(parsed.steps?.length) await animateSteps(parsed.steps);
+    const wrap=el('div','msg ai');
+    const bub=el('div','bubble');
+    if(parsed.reply){
+      bub.innerHTML = `${renderMD(parsed.reply)}${parsed.files?.length?'<div class="inline-note">Generated files are ready below.</div>':''}`;
+    }else{
+      bub.innerHTML = parsed.files?.length ? '<div class="inline-note">Generated files are ready below.</div>' : '✅ Complete';
+    }
+    if(parsed.files?.length){
+      bub.appendChild(renderFileDownloads(parsed.files,text,wantsZip(text)));
+    }
+    wrap.appendChild(bub);
+    const meta_el=el('div','msg-meta');
+    if(ms)meta_el.appendChild(el('span','',`${ms}ms`));
+    const copyBtn=el('button','','📋');
+    copyBtn.onclick=()=>{navigator.clipboard.writeText(parsed.reply||'Project ready');toast('Copied!')};
+    meta_el.appendChild(copyBtn);
+    wrap.appendChild(meta_el);
+    $('#chatArea').appendChild(wrap);
+    scrollDown();
+    state.messages.push({role:'ai',content:parsed.reply||'[Agent files ready]',meta:{ms,files:(parsed.files||[]).map(f=>f.name)},ts:Date.now()});
+    save();
+    state.agentTask.running = false;
+    $('#agentRunDot').className='agent-run-dot done';
+    $('#agentStatusText').innerText='✅ Complete';
+    loadHistoryList();
+  }catch(err){
+    state.agentTask.running = false;
+    $('#agentRunDot').className='agent-run-dot failed';
+    $('#agentStatusText').innerText='⚠️ Failed';
+    const failed = normalizeAgentStep({type:'error',label:sanitizeError(err.message)},0);
+    const row=createAgentStepRow(failed, $('#agentSteps').children.length);
+    row.classList.remove('running');
+    row.classList.add('failed','open');
+    appendBubble('ai',`⚠️ Step failed: ${sanitizeError(err.message)}`);
+    throw err;
+  }finally{
+    syncAgentPanelVisibility();
+  }
+}
+
 
 /* ============ API HELPER ============ */
 async function api(path,opts={}){
@@ -462,6 +827,13 @@ function closeSheet(id){$('#'+id).classList.remove('show');if(!document.querySel
 $('#menuBtn').onclick=openDrawer;
 $('#overlay').onclick=()=>{closeDrawer();$$('.sheet').forEach(s=>s.classList.remove('show'))};
 $$('[data-close-sheet]').forEach(b=>b.onclick=()=>closeSheet(b.dataset.closeSheet));
+
+$('#agentPanelHeader').onclick=()=>{
+  if(!state.agentTask.steps.length && !state.agentTask.running)return;
+  $('#agentPanel').classList.toggle('collapsed');
+};
+$('#agentOpenBtn').onclick=e=>{e.stopPropagation();$('#agentPanel').classList.remove('collapsed');scrollAgentPanel()};
+$('#agentExpandBtn').onclick=e=>{e.stopPropagation();$('#agentPanel').classList.toggle('expanded')};
 
 /* ============ MODEL SELECTOR ============ */
 $('#modelSelector').onclick=(e)=>{e.stopPropagation();$('#modelDropdown').classList.toggle('show')};
@@ -540,6 +912,7 @@ async function handleSend(){
       case 'youtube': return await doSummarizeYT(text);
       case 'code': return await doCode(text);
       case 'write': return await doWrite(text);
+      case 'agent': return await doAgent(text);
       default: return state.streaming ? await doChatStream(text) : await doChat(text);
     }
   }catch(e){
@@ -768,13 +1141,14 @@ const styleRow = $('#styleRow');
 const placeholders = {
   chat:"Ask Kimi anything...", search:"Search anything...", image:"Describe an image...",
   translate:"Type text to translate...", summarize:"Paste text or URL...",
-  code:"Paste your code...", write:"What should I write?", youtube:"Paste YouTube URL...",
+  code:"Paste your code...", write:"What should I write?", agent:"Describe the project or task...", youtube:"Paste YouTube URL...",
 };
 function setMode(mode){
   state.mode=mode;
   $$('.chip').forEach(c=>c.classList.toggle('active',c.dataset.mode===mode));
   input.placeholder = placeholders[mode] || "Type a message...";
   styleRow.innerHTML='';styleRow.style.display='none';
+  syncAgentPanelVisibility();
   if(mode==='image'){
     styleRow.style.display='flex';
     ['Realistic','Anime','3D','Sketch','Painting'].forEach(s=>{
